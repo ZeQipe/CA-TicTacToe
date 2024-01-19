@@ -59,8 +59,9 @@ def check_winner(board: list) -> bool:
 
 async def bot_move(board: list) -> None:
     """
-
-    :param board:
+    Выбирает ячейку, на которую будет делать ход
+    Так же имитирует ожидание перед ходом
+    :param board: str
     :return:
     """
     await asyncio.sleep(1)
@@ -83,7 +84,7 @@ async def play_game() -> None:
             if check_winner(board):
                 print_board(board)
                 input(f"{current_player} wins!")
-                break
+                return
 
             current_player = switch_player(current_player)
 
