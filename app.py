@@ -4,17 +4,18 @@ import asyncio
 
 def play_game() -> None:
     """
-    Контролирует весь игровой процесс.
+    Подготовка к игре, стартовое меню. Главный жизненный цикл игры
     :return:
     """
     while True:
         board = [" "] * 9
-        print('Выберите режим игры:\n\t1 - bot vs bot\n\t2 - plaer vs bot')
+        print('Выберите режим игры(s - завершение работы):\n\t1 - bot vs bot\n\t2 - plaer vs bot\n\ts - завершение работы')
         type_game = input('>>').replace(' ', '').lower()
         match type_game:
             case '1':
                 asyncio.run(game_process.bot_vs_bot(board))
             case '2':
-                asyncio.run(game_process.plaer_vs_bot(board))
-
+                asyncio.run(game_process.player_vs_bot(board))
+            case 's':
+                return
 

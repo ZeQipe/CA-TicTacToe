@@ -28,10 +28,17 @@ async def bot_move(board: list) -> None:
     return random.choice([i for i, x in enumerate(board) if x == " "])
 
 
-async def user_move():
+async def user_move() -> int:
+    """
+
+    :return:
+    """
     while True:
         try:
-            move = int(input("Enter your move (1-9): ")) - 1
+            move = input("Enter your move (1-9): ").lower().replace(' ', '')
+            if move == 'r':
+                return -1
+            move = int(move) - 1
             if 0 <= move <= 8:
                 return move
             else:

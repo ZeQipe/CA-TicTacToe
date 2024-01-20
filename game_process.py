@@ -1,5 +1,5 @@
 import asyncio
-import plaer_move
+import move_logic
 import os
 
 def print_board(board: list) -> None:
@@ -41,13 +41,18 @@ def switch_player(current_player: str) -> str:
     return "O" if current_player == "X" else "X"
 
 
-async def bot_vs_bot(board):
+async def bot_vs_bot(board) -> None:
+    """
+
+    :param board:
+    :return:
+    """
     current_player = 'X'
     while True:
         print_board(board)
-        move = await plaer_move.bot_move(board)
+        move = await move_logic.bot_move(board)
 
-        if plaer_move.make_move(board, move, current_player):
+        if move_logic.make_move(board, move, current_player):
             if check_winner(board):
                 print_board(board)
                 print(f"{current_player} wins!")
@@ -56,19 +61,26 @@ async def bot_vs_bot(board):
             current_player = switch_player(current_player)
 
 
-async def plaer_vs_bot(board):
-    print('Кем хотите играть? X -- O')
+async def player_vs_bot(board) -> None:
+    """
+
+    :param board:
+    :return:
+    """
     current_player = 'X'
 
     while True:
         print_board(board)
 
         if current_player == "X":
-            move = await plaer_move.user_move()
+            print('Ваш ход! Выбирайте:')
+            move = await move_logic.user_move()
+            if move == -1:
+                return
         else:
-            move = await plaer_move.bot_move(board)
+            move = await move_logic.bot_move(board)
 
-        if move != -1 and plaer_move.make_move(board, move, current_player):
+        if move != -1 and move_logic.make_move(board, move, current_player):
             if check_winner(board):
                 print_board(board)
                 if current_player == "X":
