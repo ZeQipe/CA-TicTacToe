@@ -9,7 +9,7 @@ def play_game() -> None:
     """
     while True:
         board = [" "] * 9
-        print('Выберите режим игры:\n\t1 - bot vs bot\n\t2 - player vs bot')
+        print('Выберите режим игры:\n\t1 - bot vs bot\n\t2 - player vs bot\n\t3 - player vs player')
         type_game = input('>>').replace(' ', '').lower()
         match type_game:
             case '1':
