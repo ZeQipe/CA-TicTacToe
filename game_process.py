@@ -48,7 +48,7 @@ async def bot_vs_bot(board) -> None:
     :return:
     """
     current_player = 'X'
-    while True:
+    for i in range(10):
         print_board(board)
         move = await move_logic.bot_move(board)
 
@@ -69,7 +69,7 @@ async def player_vs_bot(board) -> None:
     """
     current_player = 'X'
 
-    while True:
+    for i in range(10):
         print_board(board)
 
         if current_player == "X":
@@ -90,3 +90,4 @@ async def player_vs_bot(board) -> None:
                 return
 
             current_player = switch_player(current_player)
+            
