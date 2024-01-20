@@ -75,6 +75,6 @@ async def plaer_vs_bot(board):
                     print("You win!")
                 else:
                     print("Bot wins!")
-                break
+                return
 
             current_player = switch_player(current_player)
