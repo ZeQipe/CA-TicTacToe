@@ -1,6 +1,6 @@
-import asyncio
 import plaer_move
 import os
+
 
 def print_board(board: list) -> None:
     """
@@ -46,6 +46,8 @@ async def bot_vs_bot(board):
     while True:
         print_board(board)
         move = await plaer_move.bot_move(board)
+        if move == -1:
+            return
 
         if plaer_move.make_move(board, move, current_player):
             if check_winner(board):
@@ -57,7 +59,7 @@ async def bot_vs_bot(board):
 
 
 async def plaer_vs_bot(board):
-    print('Кем хотите играть? X -- O')
+    print('Вы играете за - X')
     current_player = 'X'
 
     while True:
@@ -67,6 +69,31 @@ async def plaer_vs_bot(board):
             move = await plaer_move.user_move()
         else:
             move = await plaer_move.bot_move(board)
+
+        if move != -1 and plaer_move.make_move(board, move, current_player):
+            if check_winner(board):
+                print_board(board)
+                if current_player == "X":
+                    print("You win!")
+                else:
+                    print("Bot wins!")
+                return
+
+            current_player = switch_player(current_player)
+
+
+async def player_vs_player(board):
+    current_player = 'X'
+
+    while True:
+        print_board(board)
+
+        if current_player == "X":
+            print('Ход игрока Х')
+            move = await plaer_move.user_move()
+        else:
+            print('Ход игрока О')
+            move = await plaer_move.user_move()
 
         if move != -1 and plaer_move.make_move(board, move, current_player):
             if check_winner(board):

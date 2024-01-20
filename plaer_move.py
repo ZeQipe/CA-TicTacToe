@@ -17,15 +17,18 @@ def make_move(board: list, position: int, current_player: str) -> bool:
     return False
 
 
-async def bot_move(board: list) -> None:
+async def bot_move(board: list) -> int:
     """
-    Выбирает ячейку, на которую будет делать ход
+    Возвращае индекс ячейки, на которую будет делать ход
     Так же имитирует ожидание перед ходом
     :param board: str
-    :return:
+    :return: int
     """
     await asyncio.sleep(1)
-    return random.choice([i for i, x in enumerate(board) if x == " "])
+    try:
+        return random.choice([i for i, x in enumerate(board) if x == " "])
+    except IndexError:
+        return -1
 
 
 async def user_move():
