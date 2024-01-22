@@ -90,4 +90,4 @@ async def player_vs_bot(board) -> None:
                 return
 
             current_player = switch_player(current_player)
-    print('Ничья!')
+    input("Ничья -_-\nНажмите Enter что бы вернуться...")
