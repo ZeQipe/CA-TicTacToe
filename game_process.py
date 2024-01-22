@@ -1,6 +1,6 @@
-import asyncio
 import move_logic
 import os
+
 
 def print_board(board: list) -> None:
     """
@@ -8,15 +8,14 @@ def print_board(board: list) -> None:
     :param board: type str
     :return: None
     """
-    clear = lambda: os.system('cls')
-    clear()
+    os.system('cls')
     for i in range(0, 9, 3):
         print("|".join(board[i:i + 3]))
 
 
 def check_winner(board: list) -> bool:
     """
-    Проверяет на то, что один из игроков уже победил.
+    проверка на победную комбинацию
     :param board: str
     :return: Вернет True, если есть победная комбинация. Иначе вернёт False.
     """
@@ -43,12 +42,12 @@ def switch_player(current_player: str) -> str:
 
 async def bot_vs_bot(board) -> None:
     """
-
+    Запускает матч 2 ботов, в случае, если на поле нет пустых мест - объявляет ничью.
     :param board:
     :return:
     """
     current_player = 'X'
-    for i in range(10):
+    while ' ' in board:
         print_board(board)
         move = await move_logic.bot_move(board)
 
@@ -59,17 +58,18 @@ async def bot_vs_bot(board) -> None:
                 return
 
             current_player = switch_player(current_player)
+    print('Ничья!')
 
 
 async def player_vs_bot(board) -> None:
     """
-
+    Запускает матч игрока против бота, в случае, если на поле нет пустых мест - объявляет ничью.
     :param board:
     :return:
     """
     current_player = 'X'
 
-    for i in range(10):
+    while ' ' in board:
         print_board(board)
 
         if current_player == "X":
@@ -90,4 +90,4 @@ async def player_vs_bot(board) -> None:
                 return
 
             current_player = switch_player(current_player)
-            
+    print('Ничья!')
