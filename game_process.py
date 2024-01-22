@@ -73,7 +73,7 @@ async def player_vs_bot(board) -> None:
         print_board(board)
 
         if current_player == "X":
-            print('Ваш ход! Выбирайте:')
+            print('Ваш ход! Выбирайте (r - для возврата в главное меню):')
             move = await move_logic.user_move()
             if move == -1:
                 return
@@ -84,9 +84,9 @@ async def player_vs_bot(board) -> None:
             if check_winner(board):
                 print_board(board)
                 if current_player == "X":
-                    print("You win!")
+                    input("Вы победили =)\nНажмите Enter что бы вернуться...")
                 else:
-                    print("Bot wins!")
+                    input("Вы проиграли =(\nНажмите Enter что бы вернуться...")
                 return
 
             current_player = switch_player(current_player)
