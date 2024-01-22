@@ -1,3 +1,4 @@
+import os
 import game_process
 import asyncio
 
@@ -8,6 +9,7 @@ def play_game() -> None:
     :return:
     """
     while True:
+        os.system('cls')
         board = [" "] * 9
         print('Выберите режим игры(s - завершение работы):\n\t1 - bot vs bot\n\t2 - plaer vs bot')
         type_game = input('>>').replace(' ', '').lower()

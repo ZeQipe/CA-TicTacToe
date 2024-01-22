@@ -54,11 +54,11 @@ async def bot_vs_bot(board) -> None:
         if move_logic.make_move(board, move, current_player):
             if check_winner(board):
                 print_board(board)
-                print(f"{current_player} wins!")
+                input(f"{current_player} Победил!\n Нажмите Enter что бы вернуться...")
                 return
 
             current_player = switch_player(current_player)
-    print('Ничья!')
+    input('Ничья!\nНажмите Enter что бы вернуться')
 
 
 async def player_vs_bot(board) -> None:
