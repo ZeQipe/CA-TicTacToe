@@ -50,6 +50,8 @@ async def bot_vs_bot(board) -> None:
     while ' ' in board:
         print_board(board)
         move = await move_logic.bot_move(board)
+        if move == -1:
+            return
 
         if move_logic.make_move(board, move, current_player):
             if check_winner(board):
@@ -91,3 +93,29 @@ async def player_vs_bot(board) -> None:
 
             current_player = switch_player(current_player)
     input("Ничья -_-\nНажмите Enter что бы вернуться...")
+
+
+async def player_vs_player(board):
+    current_player = 'X'
+
+    while ' ' in board:
+        print_board(board)
+
+        if current_player == "X":
+            print('Ход игрока Х')
+            move = await move_logic.user_move()
+        else:
+            print('Ход игрока О')
+            move = await move_logic.user_move()
+
+        if move != -1 and move_logic.make_move(board, move, current_player):
+            if check_winner(board):
+                print_board(board)
+                if current_player == "X":
+                    input("Победил игрок 'Х'\nНажмите Enter что бы вернуться...")
+                else:
+                    input("Победил игрок 'О'\nНажмите Enter что бы вернуться...")
+                return
+
+            current_player = switch_player(current_player)
+        input("Ничья :Ъ\nНажмите Enter что бы вернуться...")
