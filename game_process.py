@@ -118,4 +118,4 @@ async def player_vs_player(board):
                 return
 
             current_player = switch_player(current_player)
-        input("Ничья :Ъ\nНажмите Enter что бы вернуться...")
+    input("Ничья :Ъ\nНажмите Enter что бы вернуться...")
